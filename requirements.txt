@@ -1,0 +1,12 @@
+# LLM and Agent
+groq
+
+# Database
+SQLAlchemy
+psycopg2-binary
+
+# UI and Frontend
+streamlit
+
+# Environment & Config
+python-dotenv

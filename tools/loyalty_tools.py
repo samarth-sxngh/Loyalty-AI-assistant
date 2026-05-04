@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, text
 from config import DATABASE_URL
 
-# Create a single DB engine reused across all tools
+
 engine = create_engine(DATABASE_URL)
 
 
@@ -48,7 +48,7 @@ def get_expiring_points(customer_id: int, merchant_id: int, days: int = 60) -> d
           AND expiry_date <= CURRENT_DATE + INTERVAL ':days days'
         ORDER BY expiry_date ASC
     """)
-    # NOTE: INTERVAL doesn't accept bind params directly, so we use a workaround
+    
     query = text(f"""
         SELECT
             points,

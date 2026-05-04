@@ -13,17 +13,16 @@ from tools.loyalty_tools import (
     get_last_transaction,
 )
 
-# ── Groq client ──────────────────────────────────────────────
 client = Groq(api_key=GROQ_API_KEY)
 
-# ── Logging Setup ────────────────────────────────────────────
+
 logging.basicConfig(
     filename='agent_queries.log',
     level=logging.INFO,
     format='%(asctime)s - %(message)s'
 )
 
-# ── Guardrails ───────────────────────────────────────────────
+#Guardrails 
 PRIVACY_KEYWORDS = [
     "another customer", "other customer", "someone else",
     "other user", "another user", "different customer",
@@ -63,7 +62,7 @@ def sanitize_input(message: str) -> str:
     return message.strip()
 
 
-# ── Tool definitions for Groq function calling ───────────────
+#Tool definitions for Groq function calling 
 TOOLS = [
     {
         "type": "function",
@@ -123,7 +122,7 @@ TOOLS = [
     }
 ]
 
-# ── Tool dispatcher ───────────────────────────────────────────
+
 def dispatch_tool(tool_name: str) -> str:
     """Calls the right Python function and returns result as JSON string."""
     args = {"customer_id": CUSTOMER_ID, "merchant_id": MERCHANT_ID}

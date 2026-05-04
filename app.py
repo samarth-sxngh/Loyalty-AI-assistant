@@ -3,14 +3,14 @@ from agent.agent import chat
 from tools.loyalty_tools import get_points_balance, get_customer_name
 from config import CUSTOMER_ID, MERCHANT_ID
 
-# ── Page config ───────────────────────────────────────────────
+
 st.set_page_config(
     page_title="ABC Loyalty Assistant",
     page_icon="🎯",
     layout="centered"
 )
 
-# ── Custom CSS ────────────────────────────────────────────────
+
 st.markdown("""
     <style>
         .main { background-color: #f8f9fa; }
@@ -41,7 +41,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# ── Load customer data for sidebar ───────────────────────────
+
 @st.cache_data(ttl=60)
 def load_customer_data():
     name = get_customer_name(CUSTOMER_ID, MERCHANT_ID)
@@ -50,7 +50,7 @@ def load_customer_data():
 
 customer, balance = load_customer_data()
 
-# ── Sidebar ───────────────────────────────────────────────────
+
 with st.sidebar:
     st.markdown("## 🎯 ABC Loyalty")
     st.markdown("---")
@@ -81,30 +81,10 @@ with st.sidebar:
         </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("### 💬 Try asking:")
-    sample_questions = [
-        "How many points do I have?",
-        "Are my points expiring soon?",
-        "Do I have any coupons?",
-        "Can I redeem my points?",
-        "Show my recent activity",
-        "Why didn't I get points?",
-        "What was my last purchase?",
-    ]
-    for q in sample_questions:
-        if st.button(q, use_container_width=True, key=q):
-            st.session_state.pending_question = q
 
-    st.markdown("---")
-    st.markdown(
-        "<div style='font-size:0.75rem; color:#888;'>"
-        "Powered by Groq · ABC Company © 2026"
-        "</div>",
-        unsafe_allow_html=True
-    )
 
-# ── Main chat area ────────────────────────────────────────────
-st.markdown("## 🤖 Loyalty Assistant")
+# Main chat area 
+st.markdown("## Loyalty Assistant")
 st.markdown("Ask me anything about your points, coupons, and rewards.")
 st.markdown("---")
 
